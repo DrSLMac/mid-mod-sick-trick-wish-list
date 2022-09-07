@@ -1,9 +1,14 @@
 import React from 'react'
 import './Tricks.css'
+import Tiles from './Tiles'
 
-const Tricks = (props) => {
+const Tricks = () => {
     return (
-        <h2>Tricks go here!</h2>
+        <div className='tricks-container'>
+            <Tiles />
+            <Tiles />
+            <Tiles />
+        </div>
     )
 }
 

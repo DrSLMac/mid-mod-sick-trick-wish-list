@@ -17,7 +17,7 @@ class Form extends Component {
     }
 
     submitTrick = event => {
-        event.preventDefault()
+        // event.preventDefault()
         const newTrick = {
             id: Date.now(),
             ...this.state
@@ -37,6 +37,12 @@ class Form extends Component {
     render() {
         return (
             <form>
+                <select className='drop-down' 
+                    value={this.state.stance} 
+                    onChange={event => this.handleChange(event)}>
+                        <option>Regular</option>
+                        <option>Switch</option>
+                </select>
                 <input 
                     type='text'
                     placeholder='Trick Name'
@@ -44,20 +50,16 @@ class Form extends Component {
                     value={this.state.name}
                     onChange={ event => this.handleChange(event)}
                 />
-                <input 
-                    type='text'
-                    placeholder='Obstacle'
-                    name='obstacle'
+                <select className='drop-down' 
                     value={this.state.obstacle}
-                    onChange={ event => this.handleChange(event)}
-                />
-                <input 
-                    type='text'
-                    placeholder='Stance'
-                    name='stance'
-                    value={this.state.stance}
-                    onChange={ event => this.handleChange(event)}
-                />
+                    onChange={ event => this.handleChange(event)}>
+                        <option>Choose your obstacle</option>
+                        <option value='flatground'>Flatgroud</option>
+                        <option value='ledge'>Ledge</option>
+                        <option value='rail'>Rail</option>
+                        <option value='stairs'>Stairs</option>
+                        <option value='pool'>Pool</option>
+                </select>
                 <input 
                     type='text'
                     placeholder='Tutorial Link'

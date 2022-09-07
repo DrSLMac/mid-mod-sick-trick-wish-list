@@ -2,7 +2,7 @@ import React from 'react'
 import './Tricks.css'
 import Tiles from './Tiles'
 
-const Tricks = ({ tricks }) => {
+const Tricks = ({ tricks, deleteTrick }) => {
     const trickTiles = tricks.map(eachTrick => {
         return (
             <Tiles
@@ -12,14 +12,13 @@ const Tricks = ({ tricks }) => {
                 obstacle={eachTrick.obstacle}
                 stance={eachTrick.stance}
                 tutorial={eachTrick.tutorial}
+                deleteTrick={deleteTrick}
             />    
         )
     })
     return (
         <div className='tricks-container'>
-            <div>
            { trickTiles }
-            </div>
         </div>
     )
 }

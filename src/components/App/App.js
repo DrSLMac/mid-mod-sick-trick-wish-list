@@ -34,12 +34,22 @@ addTrick = (newTrick) => {
   this.setState({ tricks: [...this.state.tricks, newTrick]})
 }
 
+deleteTrick= (id) => {
+  const filteredTricks = this.state.tricks.filter(trick => trick.id !== id)
+  this.setState({ tricks: filteredTricks })
+}
+
   render() {
     return (
       <main className="App">
         <h1>Sick Trick Wish List</h1>
+        {!this.state.tricks.length &&
+          <div>
+            <h2>Gnarly dude! No tricks listed. Better get skatin!</h2>
+          </div>
+        }
         <Form addTrick={this.addTrick}/>
-        <Tricks tricks={this.state.tricks} />
+        <Tricks tricks={this.state.tricks} deleteTrick={this.deleteTrick}/>
       </main>
     );
   }

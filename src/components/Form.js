@@ -12,12 +12,14 @@ class Form extends Component {
         }
     }
 
-    handleChange = event => {
-        this.setState({[event.target.name]: event.target.value})
+    handleChange = (event) => {
+        const { name, value } = event.target
+        this.setState({[name]: value})
+        console.log("form this.state: ", this.state)
     }
 
-    submitTrick = event => {
-        // event.preventDefault()
+    submitTrick = (event) => {
+        event.preventDefault()
         const newTrick = {
             id: Date.now(),
             ...this.state
@@ -36,38 +38,45 @@ class Form extends Component {
 
     render() {
         return (
-            <form>
-                <select className='drop-down' 
+            <form onSubmit={this.submitTrick}>
+                <select
+                    className='drop-down'
+                    name='stance' 
                     value={this.state.stance} 
-                    onChange={event => this.handleChange(event)}>
-                        <option>Regular</option>
-                        <option>Switch</option>
+                    placeholder='Choose Your Stance'
+                    onChange={this.handleChange}>
+                        <option disabled value=''>Choose Your Stance</option>
+                        <option value='Regular'>Regular</option>
+                        <option value='Switch'>Switch</option>
                 </select>
                 <input 
                     type='text'
                     placeholder='Trick Name'
                     name='name'
                     value={this.state.name}
-                    onChange={ event => this.handleChange(event)}
+                    onChange={this.handleChange}
                 />
-                <select className='drop-down' 
-                    value={this.state.obstacle}
-                    onChange={ event => this.handleChange(event)}>
-                        <option>Choose your obstacle</option>
-                        <option value='flatground'>Flatgroud</option>
-                        <option value='ledge'>Ledge</option>
-                        <option value='rail'>Rail</option>
-                        <option value='stairs'>Stairs</option>
-                        <option value='pool'>Pool</option>
+                <select
+                    className='drop-down'
+                    name='obstacle' 
+                    value={this.state.obstacle} 
+                    placeholder='Choose Your Obstacle'
+                    onChange={this.handleChange}>
+                        <option disabled value=''>Choose Your Obstacle</option>
+                        <option value='Flatground'>Flatgroud</option>
+                        <option value='Ledge'>Ledge</option>
+                        <option value='Rail'>Rail</option>
+                        <option value='Stairs'>Stairs</option>
+                        <option value='Pool'>Pool</option>
                 </select>
                 <input 
                     type='text'
-                    placeholder='Tutorial Link'
+                    placeholder='Link to Tutorial'
                     name='tutorial'
                     value={this.state.tutorial}
-                    onChange={ event => this.handleChange(event)}
+                    onChange={this.handleChange}
                 />
-                <button onClick={event => this.submitTrick(event)}>SEND IT</button>
+                <button className='send-button'>SEND IT</button>
             </form>
         )
     }

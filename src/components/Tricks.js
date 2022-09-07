@@ -2,12 +2,24 @@ import React from 'react'
 import './Tricks.css'
 import Tiles from './Tiles'
 
-const Tricks = () => {
+const Tricks = ({ tricks }) => {
+    const trickTiles = tricks.map(eachTrick => {
+        return (
+            <Tiles
+                key={eachTrick.id}
+                id={eachTrick.id}
+                name={eachTrick.name}
+                obstacle={eachTrick.obstacle}
+                stance={eachTrick.stance}
+                tutorial={eachTrick.tutorial}
+            />    
+        )
+    })
     return (
         <div className='tricks-container'>
-            <Tiles />
-            <Tiles />
-            <Tiles />
+            <div>
+           { trickTiles }
+            </div>
         </div>
     )
 }

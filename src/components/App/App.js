@@ -1,6 +1,6 @@
 import { Component } from 'react';
 import './App.css';
-import { fetchAllTricks } from '../../apiCalls'
+// import { fetchAllTricks } from '../../apiCalls'
 import Tricks from '../Tricks'
 
 class App extends Component {
@@ -12,15 +12,31 @@ class App extends Component {
   }
 
   componentDidMount = () => {
-    fetchAllTricks().then(data => this.setState({ tricks: data }))
+    this.fetchAllTricks()
   }
+
+  fetchAllTricks = () => {
+     fetch('http://localhost:3001/api/v1/tricks')
+    .then(response => {
+      if (!response.ok) {
+        throw Error('Sick mistake. Please try again.')
+      } else {
+        return response.json()
+      }
+    })
+    .then(data => { this.setState({ tricks: data })
+  })
+  .catch(error => console.log('Whoopsie! Big ole mistake!')
+  )
+}
+// console.log('data: ', data[1]) 
 
   render() {
     return (
-      <div className="App">
+      <main className="App">
         <h1>Sick Trick Wish List</h1>
-        <Tricks />
-      </div>
+        <Tricks tricks={this.state.tricks} />
+      </main>
     );
   }
 }
